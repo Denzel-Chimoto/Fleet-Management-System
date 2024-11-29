@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../components/styles/FleetTracking.css'; // Optional styling file
+import MapComponent from './Map';
 
 const FleetTracking = () => {
   const [vehicles, setVehicles] = useState([]);
@@ -7,7 +8,7 @@ const FleetTracking = () => {
 
   useEffect(() => {
     // Fetch vehicle data from the backend API
-    fetch('/api/vehicles')
+    fetch('/vehicles.json')
       .then((response) => response.json())
       .then((data) => setVehicles(data))
       .catch((error) => console.error('Error fetching vehicle data:', error));
@@ -28,7 +29,8 @@ const FleetTracking = () => {
         {/* Map Section */}
         <div className="map-section">
           <h2>Map</h2>
-          <p>Map integration goes here.</p>
+          <MapComponent vehicles={vehicles} />
+          
         </div>
 
         {/* Vehicle List */}
