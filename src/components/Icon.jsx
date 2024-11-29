@@ -1,9 +1,12 @@
 import React from 'react'
 
-const Icon = () => {
+
+// Props fro customizable Images-> Height Width, img src, 
+const Icon = ({imgSrc}) => {
+  
   return (
     <div className='avatar'>
-      <img src="" alt="" />
+      <img src={imgSrc} height={100} width={100} alt="" />
     </div>
   )
 }

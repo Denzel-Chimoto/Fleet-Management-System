@@ -16,7 +16,7 @@ function App() {
   return (
     <div>
       <Header/>
-      <Form/>
+      <DashBoard/>
     </div>
   );
 }
