@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Form from './components/Form';
 import DashBoard from './components/DashBoard';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import FleetTracking from './components/FleetTracking';
 
 
 // First Login Page Components
@@ -15,8 +16,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <div>
-      <Header/>
-      <DashBoard/>
+      {/* <Header/> */}
+      <FleetTracking/>
+      {/* <DashBoard/> */}
     </div>
   );
 }
