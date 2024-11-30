@@ -1,17 +1,13 @@
-import pg from 'pg';
+const Pool =require('pg').Pool;
 
-const db = new pg.Client({
-    user: "PostgreSQL 17",
+const db = new Pool({
+    user: "postgres",
     host:"localhost",
-    database:"world",
+    database:"fms",
     password:"080704",
     port: 5432,
 });
 
 db.connect();
 
-db.query("SELECT * FROM capitals", (err,res)=>{
-    if(err){console.error("Error executing query",err.stack);}
-    else{let quiz = res.rows;console.log(quiz)}
-    db.end();
-})
+module.exports= db;

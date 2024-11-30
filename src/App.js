@@ -1,17 +1,13 @@
 
 import './App.css';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import CreateUser from './components/CreateUser';
 import Form from './components/Form';
-import DashBoard from './components/DashBoard';
 import 'bootstrap/dist/css/bootstrap.min.css';
-<<<<<<< HEAD
+import { Routes, Route } from "react-router-dom";
 import VehicleManagementHome from './components/VehicleManagementHome';
-import VMH from './components/VMH';
-import TaskAssignmentPage from './components/TaskAssignmentPage';
-=======
-import FleetTracking from './components/FleetTracking';
->>>>>>> b3d746428e889e4c7539b8c2046cb987ed4d3444
+import AddVehicleForm from './components/AddVehicleForm';
+import DashBoard from './components/DashBoard';
+
 
 
 // First Login Page Components
@@ -24,16 +20,25 @@ import FleetTracking from './components/FleetTracking';
 
 function App() {
   return (
-    <div>
-<<<<<<< HEAD
-      <TaskAssignmentPage/>
-=======
-      {/* <Header/> */}
-      <FleetTracking/>
-      {/* <DashBoard/> */}
->>>>>>> b3d746428e889e4c7539b8c2046cb987ed4d3444
-    </div>
+    <Routes>
+    <Route path="/create-user" element={<CreateUser />} />
+    <Route path="/login" element={<Form />} />
+    <Route path="/vehicle-management" element={<VehicleManagementHome />} />
+    <Route path="/" element={<Form />} />
+    <Route path='/addVehicle' element={<AddVehicleForm/>} />
+    <Route path='/dashboard' element={<DashBoard/>}/>
+  </Routes>
   );
 }
 
 export default App;
+
+// {/* <TaskAssignmentPage/>
+// {/* <Header/> */}
+// <FleetTracking/>
+// <DashBoard/> */}
+
+
+
+
+
