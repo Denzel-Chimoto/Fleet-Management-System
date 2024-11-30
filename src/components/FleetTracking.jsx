@@ -7,7 +7,7 @@ const FleetTracking = () => {
   const [selectedVehicle, setSelectedVehicle] = useState(null);
 
   useEffect(() => {
-    // Fetch vehicle data from the backend API
+    // Fetch vehicle data from the backend API - Temporalily using vehicles.json
     fetch('/vehicles.json')
       .then((response) => response.json())
       .then((data) => setVehicles(data))
