@@ -5,9 +5,6 @@ import Card from './Card';
 const DashBoard = () => {
   return (
     <div className='dashboard'>
-        <div>  
-            <Header/>
-        </div>
         <div className='cards'>
             <div className='card'>
                 <Card first="Active" second="Idle" third="Maintanance" />
