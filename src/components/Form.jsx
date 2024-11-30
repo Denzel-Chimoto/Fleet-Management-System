@@ -5,16 +5,23 @@ import Logo from './Logo';
 const Form = () => {
   return (
     <form action="POST">
+      <div className='mb-3'>
         <Logo />
-        <label for="email">Email</label>
-        <input name="email"/>
-
-        <label for="password">Password</label>
-        <input name="password"/>
-
+      </div>
+      <div>
+        <label class="form-label" for="email">Email</label>
+        <input type='email' class="form-control" name="email"/>
+      </div>
+      <div>
+        <label class="form-label" for="password">Password</label>
+        <input class="form-control" name="password"/>
+      </div>
+      <div class="mb-3">
         <a href="www.google.com">Forgot Password</a>
         <DropDown/>
-        <input type="submit" />
+      </div>
+     
+        <input class="btn btn-primary" type="submit" />
     </form>
   )
 }
