@@ -3,9 +3,10 @@ import Icon from './Icon';
 
 const Header = () => {
 
+  
   return (
 
-    <header>
+    <section>
       <div >
         <h1>Fleet Management System</h1>
       </div>
@@ -14,15 +15,8 @@ const Header = () => {
         <Icon imgSrc={'vfmsIMG.jpg'}/>
       </div>
 
-      <div>
-        <Icon/>
-      </div>
-
-      <div>
-        <Icon/>
-      </div>
-
-    </header>
+      
+    </section>
   );
 }
 

@@ -13,11 +13,7 @@ import TaskAssignmentPage from './components/TaskAssignmentPage';
 
 
 // First Login Page Components
-//      <Header/>
-//      <Form/>
-//<DashBoard/>
-//<AddVehicleForm/>
-//      <VMH/>
+
 //You can uncomment them, render them insisde the div instead of the dashboard component to see the Login Page
 
 function App() {
