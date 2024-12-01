@@ -1,96 +1,177 @@
-import React from 'react'
-import Logo from './Logo'
-import DropDown from './DropDown'
+import React, { useState, useEffect } from "react";
+import Logo from "./Logo";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const TaskAssignmentPage = () => {
-    return (
+  const [formData, setFormData] = useState({
+    description: "",
+    location: "",
+    deadline: "",
+    driver: "Chimoto",
+    status: "Pending",
+  });
+
+  const [tasks, setTasks] = useState([]);
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
+
+  // Fetch tasks from the database
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/tasks");
+        setTasks(response.data);
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+      }
+    };
+    fetchTasks();
+  }, []);
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // Submit the form data to the backend
+      const response = await axios.post("http://localhost:5000/api/tasks", formData);
+      setMessage("Task added successfully!");
+      
+      // Update the task list dynamically
+      setTasks([...tasks, response.data]);
+      
+      // Reset the form
+      setFormData({
+        description: "",
+        location: "",
+        deadline: "",
+        driver: "Chimoto",
+        status: "Pending",
+      });
+    } catch (error) {
+      setMessage("Error adding task. Please try again.");
+      console.error(error);
+    }
+  };
+
+  // Handle input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  return (
+    <div>
+      {/* Form for Task Creation */}
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <Logo />
+        </div>
         <div>
-            <div>
-                <form action="POST">
-                    <div className='mb-3'>
-                        <Logo />
-                    </div>
-                    <div>
-                        <label class="form-label" for="email">Task Description</label>
-                        <input type='email' class="form-control" name="email"/>
-                    </div>
-                    <div>
-                        <label class="form-label" for="password">Location</label>
-                        <input class="form-control" name="password"/>
-                    </div>
-                    <div>
-                        <label class="form-label" for="password">Deadline</label>
-                        <input class="form-control" name="password"/>
-                    </div>
-                    <div class="mb-3">
-                        <DropDown heading="Assign To Driver" value1="Chimoto" value2="Mutenje"/>
-                        <DropDown heading="Status" value1="Pending" value2="In-Progress"/>  
-                    </div>          
-                    <input class="btn btn-primary" type="submit" />
-                </form>
-
-            </div>
-            <div>
-            <div className="container mt-5">
-            {/* Search Bar */}
-            <div className="mb-3 flex">
-                <div className='m-3'>
-                    <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Search..."
-                    onChange={()=>{}}
-                />
-                </div>
-
-            <div>
-                <button className="btn btn-warning btn-sm">Add Vehicle</button>
-            </div>
-            </div>
-    
-            {/* Table */}
-            <table className="table table-striped table-bordered">
-                <thead className="table-dark">
-                    <tr>
-                        <th>#</th>
-                        <th>Task ID</th>
-                        <th>Description</th>
-                        <th>Driver</th>
-                        <th>Status</th>
-                        <th>Deadline</th>
-                        <th>Quick Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{1}</td>
-                        <td>D008</td>
-                        <td>Excavation in Chitungwiza</td>
-                        <td>Chimoto</td>
-                        <td>In-Progress</td>
-                        <td>1600hrs</td>
-                        <td>
-                            <button
-                                className="btn btn-danger btn-sm m-3"
-                                onClick={() => {}}>Edit
-                            </button>
-                            <button
-                                 className="btn btn-warning btn-sm m-3">Delete
-                            </button>
-                            <button
-                                className="btn btn-danger btn-sm m-3"
-                                onClick={() => {}}>Update Status
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+          <label className="form-label" htmlFor="description">
+            Task Description
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            name="description"
+            value={formData.description}
+            onChange={handleInputChange}
+            required
+          />
         </div>
-            </div>
+        <div>
+          <label className="form-label" htmlFor="location">
+            Location
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            name="location"
+            value={formData.location}
+            onChange={handleInputChange}
+            required
+          />
         </div>
-        
-        
-      )
-}
+        <div>
+          <label className="form-label" htmlFor="deadline">
+            Deadline
+          </label>
+          <input
+            type="datetime-local"
+            className="form-control"
+            name="deadline"
+            value={formData.deadline}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Assign To Driver</label>
+          <select
+            name="driver"
+            className="form-control"
+            value={formData.driver}
+            onChange={handleInputChange}
+          >
+            <option value="Chimoto">Chimoto</option>
+            <option value="Mutenje">Mutenje</option>
+          </select>
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Status</label>
+          <select
+            name="status"
+            className="form-control"
+            value={formData.status}
+            onChange={handleInputChange}
+          >
+            <option value="Pending">Pending</option>
+            <option value="In-Progress">In-Progress</option>
+          </select>
+        </div>
+        <button className="btn btn-primary" type="submit">
+          Submit
+        </button>
+      </form>
 
-export default TaskAssignmentPage
+      {/* Task List Table */}
+      <div className="container mt-5">
+        <h2>Task List</h2>
+        {message && <div className="alert alert-info">{message}</div>}
+        <table className="table table-striped table-bordered">
+          <thead className="table-dark">
+            <tr>
+              <th>#</th>
+              <th>Task ID</th>
+              <th>Description</th>
+              <th>Driver</th>
+              <th>Status</th>
+              <th>Deadline</th>
+              <th>Quick Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tasks.map((task, index) => (
+              <tr key={task.id}>
+                <td>{index + 1}</td>
+                <td>{task.id}</td>
+                <td>{task.description}</td>
+                <td>{task.driver}</td>
+                <td>{task.status}</td>
+                <td>{task.deadline}</td>
+                <td>
+                  <button className="btn btn-warning btn-sm m-1">Edit</button>
+                  <button className="btn btn-danger btn-sm m-1">Delete</button>
+                  <button className="btn btn-success btn-sm m-1">Update Status</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+export default TaskAssignmentPage;

@@ -27,7 +27,8 @@ const VehicleManagementHome = () => {
     // Handle delete operation
     const handleDelete = async (id) => {
       try {
-        await axios.delete('http://localhost:5000/api/users/${id}');
+        console.log(id);
+        await axios.delete('http://localhost:5000/api/vehicles/${id}');
         setData(data.filter(row => row.id !== id));
       } catch (error) {
         console.error('Error deleting data:', error);
@@ -45,6 +46,8 @@ const VehicleManagementHome = () => {
       console.log("Clicked Add Button");
       navigate("/addVehicle");
     }
+
+    
   
     return (
       <div className="container mt-5">

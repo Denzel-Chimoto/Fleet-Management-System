@@ -7,6 +7,8 @@ import { Routes, Route } from "react-router-dom";
 import VehicleManagementHome from './components/VehicleManagementHome';
 import AddVehicleForm from './components/AddVehicleForm';
 import DashBoard from './components/DashBoard';
+import FleetTracking from './components/FleetTracking';
+import TaskAssignmentPage from './components/TaskAssignmentPage';
 
 
 
@@ -27,6 +29,8 @@ function App() {
     <Route path="/" element={<Form />} />
     <Route path='/addVehicle' element={<AddVehicleForm/>} />
     <Route path='/dashboard' element={<DashBoard/>}/>
+    <Route path='/taskAssignment' element={<TaskAssignmentPage/>}/>
+
   </Routes>
   );
 }

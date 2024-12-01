@@ -8,6 +8,9 @@ const DashBoard = () => {
     const handleClick = ()=>{
         navigate('/vehicle-management');
     }
+    const handleClickTask =()=>{
+        navigate('/taskAssignment');
+    }
     
   return (
     <div className='dashboard'>
@@ -25,7 +28,7 @@ const DashBoard = () => {
         </div>
         <div>
             <button onClick={handleClick}>Vehicle</button>
-            <button>Tasks</button>
+            <button onClick={handleClickTask}>Tasks</button>
             <button>Reports</button>
         </div>
 
