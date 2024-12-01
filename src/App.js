@@ -17,8 +17,8 @@ import DashBoard from './components/DashBoard';
 function App() {
   return (
 
-
-<Form/>
+<CreateUser/>
+// <Form/>
   //   <Routes>
   //   <Route path="/create-user" element={<CreateUser />} />
   //   <Route path="/login" element={<Form />} />

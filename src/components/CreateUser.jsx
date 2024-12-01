@@ -81,7 +81,6 @@ const CreateUser = () => {
           >
             <option value="Driver">Driver</option>
             <option value="Fleet Manager">Fleet Manager</option>
-            <option value="Admin">Admin</option>
           </select>
         </div>
         <button type="submit">Create User</button>
