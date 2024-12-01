@@ -1,7 +1,8 @@
-import React, { Fragment, useState } from 'react';
-import DropDown from './DropDown';
-import Logo from './Logo';
-import { useNavigate } from 'react-router-dom';
+import React, { Fragment, useState } from "react";
+import DropDown from "./DropDown";
+import Logo from "./Logo";
+import { useNavigate } from "react-router-dom";
+import '../components/styles/Form.css';
 
 const Form = () => {
   const [email, setEmail] = useState("");
@@ -11,7 +12,7 @@ const Form = () => {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  const onSubmitForm = async e => {
+  const onSubmitForm = async (e) => {
     e.preventDefault();
     setLoading(true);
 
@@ -22,18 +23,12 @@ const Form = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      console.log("Sending data:", { email, password, role });
-
 
       const result = await response.json();
-      console.log(result)
-
       if (response.ok) {
-        // Successful login, redirect to Vehicle Management
         setMessage(result.message);
-        navigate("/dashboard"); // Redirect to Vehicle Management
+        navigate("/dashboard");
       } else {
-        // Failed login
         setMessage(result.message);
       }
     } catch (err) {
@@ -46,26 +41,57 @@ const Form = () => {
 
   return (
     <Fragment>
-      <div className="mb-3">
-        <Logo />
+      <div className="form-container">
+        <div className="logo-container">
+          <Logo />
+        </div>
+        <form onSubmit={onSubmitForm} className="login-form">
+          <div className="mb-3">
+            <label className="form-label" htmlFor="email">
+              Email
+            </label>
+            <input
+              onChange={(e) => setEmail(e.target.value)}
+              type="email"
+              value={email}
+              className="form-control"
+              name="email"
+              id="email"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label" htmlFor="password">
+              Password
+            </label>
+            <input
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              value={password}
+              className="form-control"
+              name="password"
+              id="password"
+              required
+            />
+          </div>
+          <div className="mb-3 d-flex justify-content-between align-items-center">
+            <a href="/create-user">Forgot Password?</a>
+            <DropDown
+              value1="Fleet Manager"
+              value2="Driver"
+              onChange={(e) => setRole(e.target.value)}
+            />
+          </div>
+          <button
+            className="btn btn-primary w-100"
+            type="submit"
+            disabled={loading}
+          >
+            {loading ? "Submitting..." : "Submit"}
+          </button>
+        </form>
+        {message && <p className="mt-3 alert alert-info">{message}</p>}
       </div>
-      <form onSubmit={onSubmitForm}>
-        <div>
-          <label className="form-label" htmlFor="email">Email</label>
-          <input onChange={e => setEmail(e.target.value)} type="email" value={email} className="form-control" name="email" id="email" required />
-        </div>
-        <div>
-          <label className="form-label" htmlFor="password">Password</label>
-          <input onChange={e => setPassword(e.target.value)} type="password" value={password} className="form-control" name="password" id="password" required />
-        </div>
-        <div className="mb-3">
-          <a href="/create-user">Forgot Password</a>
-          <DropDown value1="Fleet Manager" value2="Driver" onChange={e => setRole(e.target.value)} />
-        </div>
-        <input className="btn btn-primary" type="submit" value="Submit" disabled={loading} />
-      </form>
-      {loading && <p>Loading...</p>}
-      {message && <p>{message}</p>}
     </Fragment>
   );
 };
