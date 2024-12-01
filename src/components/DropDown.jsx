@@ -1,5 +1,8 @@
 import React, {useState} from 'react'
 
+
+
+
 const DropDown = (props) => {
     const [selectedOption,setSelectedOption] = useState('');
 
@@ -12,8 +15,8 @@ const DropDown = (props) => {
       <p>{props.heading}</p>
       <select onChange={handleChange} value={selectedOption} name="" id="">
         <option value="">--Select--</option>
-        <option class="dropdown-item" value="manager">{props.value1}</option>
-        <option class="dropdown-item" value="driver">{props.value2}</option>
+        <option class="dropdown-item" value={props.value1}>{props.value1}</option>
+        <option class="dropdown-item" value={props.value2}>{props.value2}</option>
         
       </select>
       
