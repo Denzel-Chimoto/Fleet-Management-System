@@ -129,17 +129,6 @@ app.get("/api/users", async (req, res) => {
   }
 });
 
-// Route to update a vehicle entry properties
-app.put("/api/vehicles/:id", async (req, res) => {
-  try {
-    const { id } = req.params; // Extract the todo ID from the URL parameters
-    const { description } = req.body; // Extract the new description from the request body
-    await pool.query("UPDATE vehicles SET description = $1 WHERE todo_id = $2", [description, id]); // Update the todo in the database
-    res.json({ message: "Todo updated" }); // Respond with a success message
-  } catch (error) {
-    console.error(error.message);
-  }
-});
 
 // Route to delete a vehicle by ID
 app.delete("/api/vehicles/:id", async (req, res) => {
@@ -170,7 +159,40 @@ app.delete("/api/tasks/:id", async (req, res) => {
 });
 
 
+
+// Update vehicle endpoint
+app.put('/api/vehicles/:id', async (req, res) => {
+  const { id } = req.params; // Extract vehicle ID from URL
+  const { type, registration, status, location } = req.body; // Extract updated data from request body
+
+  try {
+    // SQL query to update vehicle data
+    const query = `
+      UPDATE vehicles 
+      SET type = $1, registration = $2, status = $3, location = $4
+      WHERE id = $5
+      RETURNING *;
+    `;
+
+    // Execute query
+    const result = await pool.query(query, [type, registration, status, location, id]);
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: 'Vehicle not found' });
+    }
+
+    res.status(200).json(result.rows[0]); // Return updated vehicle data
+  } catch (error) {
+    console.error('Error updating vehicle:', error);
+    res.status(500).json({ error: 'An error occurred while updating the vehicle' });
+  }
+});
+
+
+
+
 // Start the server and listen on the specified port
 app.listen(port, () => {
   console.log(`Server is running at ${port}`);
 });
+

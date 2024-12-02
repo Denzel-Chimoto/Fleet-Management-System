@@ -4,11 +4,12 @@ import { useNavigate } from "react-router-dom";
 import "./styles/VMH.css";
 
 const VehicleManagementHome = () => {
-  const [data, setData] = useState([]); // State for vehicle data
-  const [searchText, setSearchText] = useState(""); // State for search input
-  const navigate = useNavigate(); // Hook for navigation
+  const [data, setData] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [editData, setEditData] = useState(null); // Track the row being edited
+  const [isEditing, setIsEditing] = useState(false); // Toggle edit mode
+  const navigate = useNavigate();
 
-  // Fetch data from the backend
   useEffect(() => {
     fetchData();
   }, []);
@@ -16,37 +17,55 @@ const VehicleManagementHome = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get("http://localhost:5000/api/vehicles");
-      setData(response.data); // Update state with fetched data
+      setData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-  // Handle delete operation
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/vehicles/${id}`); // Include ID in the URL
-      setData(data.filter((row) => row.id !== id)); // Remove deleted row from state
+      await axios.delete(`http://localhost:5000/api/vehicles/${id}`);
+      setData(data.filter((row) => row.id !== id));
     } catch (error) {
       console.error("Error deleting data:", error);
     }
   };
 
-  // Filter data based on search input
+  const handleEdit = (row) => {
+    setEditData(row);
+    setIsEditing(true);
+  };
+
+  const handleSave = async () => {
+    try {
+      const response = await axios.put(
+        `http://localhost:5000/api/vehicles/${editData.id}`,
+        editData
+      );
+      setData(
+        data.map((row) => (row.id === editData.id ? response.data : row))
+      );
+      setIsEditing(false);
+      setEditData(null);
+    } catch (error) {
+      console.error("Error updating data:", error);
+    }
+  };
+
+  const handleCancel = () => {
+    setIsEditing(false);
+    setEditData(null);
+  };
+
   const filteredData = data.filter((row) =>
     ["type", "registration", "status", "location"].some((key) =>
       row[key]?.toString().toLowerCase().includes(searchText.toLowerCase())
     )
   );
 
-  // Navigate to Add Vehicle page
-  const handleAdd = () => {
-    navigate("/addVehicle");
-  };
-
   return (
     <div className="vehicle-container">
-      {/* Search Bar */}
       <div className="search-bar">
         <input
           type="text"
@@ -55,44 +74,74 @@ const VehicleManagementHome = () => {
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />
-        <button onClick={handleAdd} className="add-button">
-          Add Vehicle
-        </button>
+        <button className="add-button" onClick={() => navigate("/addVehicle")}>Add Vehicle</button>
       </div>
 
-      {/* Table */}
-      <table className="vehicle-table">
-        <thead>
-          <tr>
-            <th>Entry #</th>
-            <th>Vehicle Type</th>
-            <th>Reg No</th>
-            <th>Status</th>
-            <th>Location</th>
-            <th>Quick Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredData.map((row, index) => (
-            <tr key={row.id}>
-              <td>{index + 1}</td>
-              <td>{row.type}</td>
-              <td>{row.registration}</td>
-              <td>{row.status}</td>
-              <td>{row.location}</td>
-              <td>
-                <button className="edit-button">Edit</button>
-                <button
-                  className="delete-button"
-                  onClick={() => handleDelete(row.id)}
-                >
-                  Delete
-                </button>
-              </td>
+      {isEditing ? (
+        <div className="edit-form">
+          <h3>Edit Vehicle</h3>
+          <input
+            type="text"
+            value={editData.type}
+            onChange={(e) => setEditData({ ...editData, type: e.target.value })}
+            placeholder="Vehicle Type"
+          />
+          <input
+            type="text"
+            value={editData.registration}
+            onChange={(e) =>
+              setEditData({ ...editData, registration: e.target.value })
+            }
+            placeholder="Registration"
+          />
+          <input
+            type="text"
+            value={editData.status}
+            onChange={(e) => setEditData({ ...editData, status: e.target.value })}
+            placeholder="Status"
+          />
+          <input
+            type="text"
+            value={editData.location}
+            onChange={(e) =>
+              setEditData({ ...editData, location: e.target.value })
+            }
+            placeholder="Location"
+          />
+          <div className="edit-actions">
+            <button onClick={handleSave}>Save</button>
+            <button onClick={handleCancel}>Cancel</button>
+          </div>
+        </div>
+      ) : (
+        <table className="vehicle-table">
+          <thead>
+            <tr>
+              <th>Entry #</th>
+              <th>Vehicle Type</th>
+              <th>Reg No</th>
+              <th>Status</th>
+              <th>Location</th>
+              <th>Quick Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredData.map((row, index) => (
+              <tr key={row.id}>
+                <td>{index + 1}</td>
+                <td>{row.type}</td>
+                <td>{row.registration}</td>
+                <td>{row.status}</td>
+                <td>{row.location}</td>
+                <td>
+                  <button className="edit-button" onClick={() => handleEdit(row)}>Edit</button>
+                  <button className="delete-button" onClick={() => handleDelete(row.id)}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };
