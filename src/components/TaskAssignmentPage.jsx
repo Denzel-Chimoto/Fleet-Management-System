@@ -144,7 +144,7 @@ const TaskAssignmentPage = () => {
 
       {/* Task List Table */}
       <div className="container mt-5">
-        <h2>Task List</h2>
+        <h2 style={{color:"white"}}>Task List</h2>
         {message && <div className="alert alert-info">{message}</div>}
         <table className="table table-striped table-bordered">
           <thead className="table-dark">

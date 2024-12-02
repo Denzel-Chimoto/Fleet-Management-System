@@ -38,8 +38,8 @@ const AddVehicleForm = () => {
     };
     return (
         <form action="POST" onSubmit={handleSubmit}>
-          <div className='mb-3'>
-            <Logo />
+          <div className='mb-3' >
+            <Logo style={{height:"20vh"}} imgSrc={"vfmsIMGBlack.png"}/>
           </div>
           <div>
             <label className="form-label" htmlFor="type">Vehicle Type</label>

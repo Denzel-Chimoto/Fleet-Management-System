@@ -43,7 +43,7 @@ const Form = () => {
     <Fragment>
       <div className="form-container">
         <div className="logo-container">
-          <Logo />
+          <Logo imgSrc={"vfmsIMG.png"}/>
         </div>
         <form onSubmit={onSubmitForm} className="login-form">
           <div className="mb-3">

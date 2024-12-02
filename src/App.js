@@ -26,9 +26,9 @@ function App() {
     <Route path="/create-user" element={<CreateUser />} />
     <Route path="/login" element={<Form />} />
     <Route path="/vehicle-management" element={<VehicleManagementHome />} />
-    <Route path="/" element={<Form />} />
+    {/* <Route path="/" element={<Form />} /> */}
     <Route path='/addVehicle' element={<AddVehicleForm/>} />
-    <Route path='/dashboard' element={<DashBoard/>}/>
+    <Route path='/' element={<DashBoard/>}/>
     <Route path='/taskAssignment' element={<TaskAssignmentPage/>}/>
 
   </Routes>

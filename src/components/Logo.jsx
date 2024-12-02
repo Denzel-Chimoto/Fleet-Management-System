@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Logo = () => {
+const Logo = ({style, imgSrc}) => {
   return (
     <div>
-        <img src="vfmsIMG.png" alt="A pic" />
+        <img src={imgSrc} style={style} alt="A pic" />
     </div>
   )
 }
