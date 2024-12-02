@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./styles/VMH.css";
 
 const VehicleManagementHome = () => {
   const [data, setData] = useState([]); // State for vehicle data
@@ -44,24 +45,24 @@ const VehicleManagementHome = () => {
   };
 
   return (
-    <div className="container mt-5">
+    <div className="vehicle-container">
       {/* Search Bar */}
-      <div className="d-flex justify-content-between mb-3">
+      <div className="search-bar">
         <input
           type="text"
-          className="form-control me-3"
+          className="search-input"
           placeholder="Search by type, registration, status, or location..."
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />
-        <button onClick={handleAdd} className="btn btn-warning">
+        <button onClick={handleAdd} className="add-button">
           Add Vehicle
         </button>
       </div>
 
       {/* Table */}
-      <table className="table table-striped table-bordered">
-        <thead className="table-dark">
+      <table className="vehicle-table">
+        <thead>
           <tr>
             <th>Entry #</th>
             <th>Vehicle Type</th>
@@ -80,9 +81,9 @@ const VehicleManagementHome = () => {
               <td>{row.status}</td>
               <td>{row.location}</td>
               <td>
-                <button className="btn btn-warning btn-sm me-2">Edit</button>
+                <button className="edit-button">Edit</button>
                 <button
-                  className="btn btn-danger btn-sm"
+                  className="delete-button"
                   onClick={() => handleDelete(row.id)}
                 >
                   Delete
