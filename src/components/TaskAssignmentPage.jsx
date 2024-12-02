@@ -33,14 +33,9 @@ const TaskAssignmentPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Submit the form data to the backend
       const response = await axios.post("http://localhost:5000/api/tasks", formData);
       setMessage("Task added successfully!");
-      
-      // Update the task list dynamically
       setTasks([...tasks, response.data]);
-      
-      // Reset the form
       setFormData({
         description: "",
         location: "",
@@ -58,6 +53,18 @@ const TaskAssignmentPage = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  // Handle delete operation
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/tasks/${id}`);
+      setTasks(tasks.filter((task) => task.id !== id));
+      setMessage("Task deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting task:", error);
+      setMessage("Error deleting task. Please try again.");
+    }
   };
 
   return (
@@ -162,8 +169,15 @@ const TaskAssignmentPage = () => {
                 <td>{task.deadline}</td>
                 <td>
                   <button className="btn btn-warning btn-sm m-1">Edit</button>
-                  <button className="btn btn-danger btn-sm m-1">Delete</button>
-                  <button className="btn btn-success btn-sm m-1">Update Status</button>
+                  <button
+                    className="btn btn-danger btn-sm m-1"
+                    onClick={() => handleDelete(task.id)}
+                  >
+                    Delete
+                  </button>
+                  <button className="btn btn-success btn-sm m-1">
+                    Update Status
+                  </button>
                 </td>
               </tr>
             ))}

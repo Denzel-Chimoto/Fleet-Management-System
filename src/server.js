@@ -129,12 +129,12 @@ app.get("/api/users", async (req, res) => {
   }
 });
 
-// Route to update a todo item
-app.put("/todos/:id", async (req, res) => {
+// Route to update a vehicle entry properties
+app.put("/api/vehicles/:id", async (req, res) => {
   try {
     const { id } = req.params; // Extract the todo ID from the URL parameters
     const { description } = req.body; // Extract the new description from the request body
-    await pool.query("UPDATE todo SET description = $1 WHERE todo_id = $2", [description, id]); // Update the todo in the database
+    await pool.query("UPDATE vehicles SET description = $1 WHERE todo_id = $2", [description, id]); // Update the todo in the database
     res.json({ message: "Todo updated" }); // Respond with a success message
   } catch (error) {
     console.error(error.message);
@@ -151,6 +151,24 @@ app.delete("/api/vehicles/:id", async (req, res) => {
     console.error(error.message);
   }
 });
+
+// Route to delete a task by ID
+app.delete("/api/tasks/:id", async (req, res) => {
+  try {
+    const { id } = req.params; // Extract the task ID from the URL parameters
+    const result = await pool.query("DELETE FROM tasks WHERE id = $1 RETURNING *", [id]); // Delete the task from the database and return the deleted row
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ message: "Task not found" }); // Handle case where the task does not exist
+    }
+
+    res.json({ message: "Task was deleted successfully", deletedTask: result.rows[0] }); // Respond with success and details of the deleted task
+  } catch (error) {
+    console.error("Error deleting task:", error);
+    res.status(500).json({ message: "Internal server error" }); // Handle server errors
+  }
+});
+
 
 // Start the server and listen on the specified port
 app.listen(port, () => {
