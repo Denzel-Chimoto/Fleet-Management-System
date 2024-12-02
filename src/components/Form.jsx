@@ -84,6 +84,7 @@ const Form = () => {
           </div>
           <button
             className="btn btn-primary w-100"
+            id="submit"
             type="submit"
             disabled={loading}
           >
