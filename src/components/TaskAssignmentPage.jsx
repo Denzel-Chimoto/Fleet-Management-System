@@ -72,7 +72,7 @@ const TaskAssignmentPage = () => {
       {/* Form for Task Creation */}
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <Logo />
+          <Logo imgSrc={"vfmsIMG.png"} style={{height:"20vh"}}/>
         </div>
         <div>
           <label className="form-label" htmlFor="description">
