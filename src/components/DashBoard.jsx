@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import Card from './Card';
+import Graph from './Graph';
 import { useNavigate } from 'react-router-dom';
 import './styles/Dashboard.css';
 
@@ -29,7 +30,8 @@ const DashBoard = () => {
                     <Card first="Driver Name :" second="Driver ID :" third="Number Of Tasks :" />
                 </div>
             </div>
-            <div>
+            <Graph /> {/* Add the Graph component */}
+            <div className="buttons">
                 <button onClick={handleClick}>Vehicle</button>
                 <button onClick={handleClickTask}>Tasks</button>
                 <button>Reports</button>

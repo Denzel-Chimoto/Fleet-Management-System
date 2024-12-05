@@ -14,8 +14,6 @@ const Header = () => {
       <div>
         <Icon imgSrc={'vfmsIMG.png'}/>
       </div>
-
-      
     </section>
   );
 }
