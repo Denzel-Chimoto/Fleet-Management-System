@@ -6,7 +6,7 @@ const Icon = ({imgSrc}) => {
   
   return (
     <div className='avatar'>
-      <img src={imgSrc} height={100} width={100} alt="" />
+      <img src={imgSrc} height={100}  alt="" />
     </div>
   )
 }

@@ -2,20 +2,13 @@ import React from 'react';
 import Icon from './Icon';
 
 const Header = () => {
-
-  
   return (
-
-    <section>
-      <div >
-        <h1>Fleet Management System</h1>
-      </div>
-
+    <section className="header">
       <div>
-        <Icon imgSrc={'vfmsIMG.png'}/>
+        <h1>Vehicle Fleet Management System</h1>
       </div>
     </section>
   );
-}
+};
 
-export default Header
+export default Header;
