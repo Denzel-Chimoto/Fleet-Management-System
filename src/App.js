@@ -1,4 +1,4 @@
-import React, {useState} from 'react'; 
+import React from 'react'; 
 import './App.css';
 import CreateUser from './components/CreateUser';
 import Form from './components/Form';
@@ -8,12 +8,9 @@ import AddVehicleForm from './components/AddVehicleForm';
 import DashBoard from './components/DashBoard';
 import FleetTracking from './components/FleetTracking';
 import TaskAssignmentPage from './components/TaskAssignmentPage';
-<<<<<<< HEAD
 import ReportsPage from './components/ReportsPage';
-=======
 import Header from './components/Header';
 import Sidebar from './components/SideBar';
->>>>>>> da42e36bf52cbbc5e77d73d32eda63bffd99f748
 
 
 
@@ -42,12 +39,9 @@ function App() {
     <Route path='/addVehicle' element={<AddVehicleForm/>} />
     <Route path='/dashboard' element={<DashBoard/>}/>
     <Route path='/taskAssignment' element={<TaskAssignmentPage/>}/>
-<<<<<<< HEAD
     <Route path='/tracking' element={<FleetTracking/>}/>
     <Route path='/reportsPage' element={<ReportsPage/>}/>
 
-=======
->>>>>>> da42e36bf52cbbc5e77d73d32eda63bffd99f748
   </Routes>
   </div>
   </>
