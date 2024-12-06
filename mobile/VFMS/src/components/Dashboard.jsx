@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Button, FlatList, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 
-export default function Dashboard({ navigation }) {
+export default function Dashboard({ navigation}) {
   const [tasks, setTasks] = useState([
     // Example tasks; replace with real data or start with an empty array for testing.
     { id: '1', title: 'Deliver goods to location A', status: 'Pending' },
@@ -22,6 +22,7 @@ export default function Dashboard({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Fleet Management System</Text>
+      <Text style={styles.subtitle}>Welcome</Text>
 
       {/* Display Assigned Tasks */}
       <Text style={styles.subtitle}>Assigned Tasks</Text>
@@ -51,8 +52,8 @@ export default function Dashboard({ navigation }) {
 
       {/* Navigation Button to View Vehicle Details */}
       <Button
-        title="View Vehicle Details"
-        onPress={() => navigation.navigate('VehicleDetails')}
+        title="View All Tasks"
+        onPress={() => navigation.navigate('CurrentTasks')}
       />
     </View>
   );

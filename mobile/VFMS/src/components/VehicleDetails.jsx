@@ -1,80 +1,92 @@
-import React from 'react';
-import { View, Text, StyleSheet, Button, ScrollView, Alert } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Button, FlatList, StyleSheet, ActivityIndicator } from 'react-native';
+import axios from 'axios';
 
-export default function VehicleDetails() {
-  // Function to report an issue
-  const reportIssue = () => {
-    Alert.alert("Report Issue", "Thank you for reporting. The fleet manager will be notified.");
+const CurrentTasks = () => {
+  const [tasks, setTasks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch tasks from the backend API
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const response = await axios.get('http://10.79.250.165:5000/api/tasks'); // Use your local IP
+        setTasks(response.data);
+        setLoading(false);
+      } catch (err) {
+        setError('Error fetching tasks');
+        setLoading(false);
+      }
+    };
+
+    fetchTasks();
+  }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://10.79.250.165:5000/api/tasks/${id}`);
+      setTasks(tasks.filter((task) => task.id !== id));
+    } catch (error) {
+      console.error('Error deleting task:', error);
+    }
   };
 
-  // Function to mark the task as completed
-  const completeTask = () => {
-    Alert.alert("Task Completed", "Your current task has been marked as completed.");
-  };
+  if (loading) {
+    return <ActivityIndicator size="large" color="#0000ff" />;
+  }
+
+  if (error) {
+    return (
+      <View style={styles.container}>
+        <Text>{error}</Text>
+      </View>
+    );
+  }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Vehicle Details</Text>
-
-      {/* Vehicle Overview */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Vehicle Information</Text>
-        <Text style={styles.infoText}>Registration Number: XYZ-1234</Text>
-        <Text style={styles.infoText}>Make & Model: Toyota Hilux</Text>
-        <Text style={styles.infoText}>Status: On Trip</Text>
-        <Text style={styles.infoText}>Last Maintenance: 2024-11-20</Text>
-      </View>
-
-      {/* Current Task/Trip Details */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Current Task</Text>
-        <Text style={styles.infoText}>Task: Deliver goods to location A</Text>
-        <Text style={styles.infoText}>Start Location: Warehouse B</Text>
-        <Text style={styles.infoText}>End Location: Location A</Text>
-        <Text style={styles.infoText}>Estimated Completion: 3:30 PM</Text>
-      </View>
-
-      {/* Actionable Buttons */}
-      <View style={styles.actions}>
-        <Button title="Mark Task as Completed" onPress={completeTask} />
-        <Button title="Report an Issue" onPress={reportIssue} />
-      </View>
-    </ScrollView>
+    <View style={styles.container}>
+      <Text style={styles.header}>Task List</Text>
+      <FlatList
+        data={tasks}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item, index }) => (
+          <View style={styles.taskContainer}>
+            <Text style={styles.taskText}>{index + 1}. {item.description}</Text>
+            <Text style={styles.taskText}>Driver: {item.driver}</Text>
+            <Text style={styles.taskText}>Status: {item.status}</Text>
+            <Text style={styles.taskText}>Deadline: {item.deadline}</Text>
+            <Button title="Delete" onPress={() => handleDelete(item.id)} />
+          </View>
+        )}
+      />
+    </View>
   );
-}
+};
+
+
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
-    padding: 16,
-    backgroundColor: '#f5f5f5',
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#f4f4f4',
   },
-  title: {
+  header: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 16,
-    textAlign: 'center',
+    marginBottom: 10,
   },
-  section: {
+  taskContainer: {
     backgroundColor: '#fff',
-    padding: 16,
-    borderRadius: 8,
-    marginBottom: 16,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    shadowOffset: { width: 0, height: 2 },
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 5,
+    elevation: 2,
   },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    marginBottom: 8,
-  },
-  infoText: {
+  taskText: {
     fontSize: 16,
-    marginBottom: 4,
-  },
-  actions: {
-    marginTop: 20,
   },
 });
+
+export default CurrentTasks;
