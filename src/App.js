@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React, {useState} from 'react'; 
 import './App.css';
 import CreateUser from './components/CreateUser';
 import Form from './components/Form';
@@ -8,6 +8,8 @@ import AddVehicleForm from './components/AddVehicleForm';
 import DashBoard from './components/DashBoard';
 import FleetTracking from './components/FleetTracking';
 import TaskAssignmentPage from './components/TaskAssignmentPage';
+import Header from './components/Header';
+import Sidebar from './components/SideBar';
 
 
 
@@ -20,7 +22,14 @@ import TaskAssignmentPage from './components/TaskAssignmentPage';
 //You can uncomment them, render them insisde the div instead of the dashboard component to see the Login Page
 
 function App() {
+
+
+
   return (
+    <>
+    <Header/>
+    <div className='grid-container'>
+      <Sidebar/>
     <Routes>
     <Route path="/create-user" element={<CreateUser />} />
     <Route path="/login" element={<Form />} />
@@ -29,8 +38,9 @@ function App() {
     <Route path='/addVehicle' element={<AddVehicleForm/>} />
     <Route path='/' element={<DashBoard/>}/>
     <Route path='/taskAssignment' element={<TaskAssignmentPage/>}/>
-
   </Routes>
+  </div>
+  </>
   );
 }
 

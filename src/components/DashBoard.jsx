@@ -48,8 +48,7 @@ const DashBoard = () => {
 
     return (
         <div className="dashboard">
-            <Header />
-            <div className="cards">
+            <div className="main-cards">
                 {/* Vehicle Card */}
                 <div className="card">
                     <Card 
