@@ -6,7 +6,7 @@
   align-items: center;
   padding: 20px;
   width: 100%;
-  background-color: #ffffff;
+  background: linear-gradient(to bottom, #f9f9f9, #ffffff); /* Subtle gradient for a polished look */
   min-height: 100vh;
 }
 
@@ -15,34 +15,40 @@
   justify-content: center;
   gap: 20px;
   margin: 20px 0;
-  flex-wrap: wrap; /* Allows the cards to wrap in smaller screens */
+  flex-wrap: wrap; /* Allows the cards to wrap on smaller screens */
 }
 
 .card {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.05);
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 15px;
   width: 400px;
-  height: 400px;
+  min-height: 250px; /* Minimum height for flexibility */
   text-align: center;
   margin: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
 }
 
-/* Card heading and paragraph styles */
+/* Card hover effect */
+.card:hover {
+  transform: scale(1.05); /* Slight zoom effect */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Enhanced shadow for hover */
+}
+
 .card h3 {
-  font-size: 18px;
-  color: #333;
+  font-size: clamp(1rem, 2.5vw, 1.5rem); /* Responsive font scaling */
+  color: #222; /* Darker shade for better contrast */
   margin-bottom: 10px;
 }
 
 .card p {
-  font-size: 16px;
-  color: #555;
+  font-size: clamp(0.9rem, 2vw, 1.2rem); /* Responsive font scaling */
+  color: #444; /* Slightly darker text for improved readability */
 }
 
-/* Button Styles */
+/* Button styles */
 button {
   background-color: #ff7f50;
   color: white;
@@ -52,11 +58,12 @@ button {
   font-size: 16px;
   cursor: pointer;
   margin: 5px;
-  transition: background-color 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth animation */
 }
 
 button:hover {
   background-color: #ff6347;
+  transform: scale(1.1); /* Slight grow effect on hover */
 }
 
 button:active {
@@ -65,7 +72,7 @@ button:active {
 
 button:focus {
   outline: none;
-  box-shadow: 0 0 3px rgba(255, 127, 80, 0.8);
+  box-shadow: 0 0 3px rgba(255, 127, 80, 0.8); /* Glow effect on focus */
 }
 
 /* Media Queries for responsiveness */
@@ -73,33 +80,39 @@ button:focus {
 /* For tablets and smaller screens */
 @media (max-width: 768px) {
   .cards {
-      flex-direction: column;
-      align-items: center;
+    flex-direction: column;
+    align-items: center;
   }
 
   .card {
-      width: 90%; /* Cards will take up 90% of the container width */
-      height: auto; /* Allow the card height to adjust automatically */
+    width: 90%; /* Cards will take up 90% of the container width */
+    height: auto; /* Allow card height to adjust automatically */
   }
 }
 
 /* For mobile devices */
 @media (max-width: 480px) {
   .dashboard {
-      padding: 10px;
+    padding: 10px;
   }
 
   .cards {
-      flex-direction: column;
-      align-items: center;
+    flex-direction: column;
+    align-items: center;
   }
 
   .card {
-      width: 100%; /* Cards will take up the entire width on mobile */
-      height: auto; /* Allow the card height to adjust automatically */
+    width: 100%; /* Cards will take up the entire width on mobile */
+    height: auto; /* Allow the card height to adjust automatically */
+  }
+
+  .card:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s ease-in-out;
   }
 
   button {
-      padding: 8px 12px; /* Smaller button for mobile */
+    padding: 10px 14px; /* Slightly larger button for better usability on small screens */
+    font-size: 18px; /* Larger font for accessibility */
   }
 }

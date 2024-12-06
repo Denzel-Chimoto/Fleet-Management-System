@@ -6,41 +6,42 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: whitesmoke;
-
 }
-form{
+
+form {
   padding: 30px;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
-header{
-  padding:10px 20px;
+
+header {
+  padding: 10px 20px;
   background-color: orange;
   margin: auto -16px;
-  box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-header h1{
-  color: #fff;
+
+header h1 {
+  color: black;
   font-family: "McLaren", cursive;
   font-weight: 200;
 }
- 
-footer{
-  position:fixed;
+
+footer {
+  position: fixed;
   text-align: center;
   bottom: 0;
   width: 100%;
   height: 2.5rem;
   margin-top: 50px;
-
 }
-.card{
+
+.card {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -48,13 +49,14 @@ footer{
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0 0 5px 4px rgba(83, 80, 80, 0.3);
-
 }
-.cards{
+
+.cards {
   display: flex;
   flex-direction: row;
 }
-.avatar{
+
+.avatar {
   height: 50px;
   width: 50px;
   border-radius: 50%;
@@ -62,7 +64,6 @@ footer{
   gap: 10px;
 }
 
-.dashboard{
-
+.dashboard {
   background-color: red;
 }
