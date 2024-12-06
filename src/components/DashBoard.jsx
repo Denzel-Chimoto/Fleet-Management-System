@@ -32,7 +32,7 @@ const DashBoard = () => {
     };
 
     const driverData = {
-        driverName: "John Doe",
+        driverName: "Tofara Chimoto",
         driverID: "DR12345",
         numberOfTasks: 15,
     };
@@ -45,6 +45,13 @@ const DashBoard = () => {
     const handleClickTask = () => {
         navigate('/taskAssignment');
     };
+
+    const handleClickTracking = () =>{
+        navigate('/tracking');
+    };
+    const handleClickReports = () =>{
+        navigate('/reportsPage');
+    }
 
     return (
         <div className="dashboard">
@@ -84,7 +91,8 @@ const DashBoard = () => {
             <div className="buttons">
                 <button onClick={handleClick}>Vehicle</button>
                 <button onClick={handleClickTask}>Tasks</button>
-                <button>Reports</button>
+                <button onClick={handleClickReports}>Reports</button>
+                <button onClick={handleClickTracking}>Track Vehicles</button>
             </div>
         </div>
     );

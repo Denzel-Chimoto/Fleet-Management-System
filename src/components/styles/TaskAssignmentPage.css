@@ -65,6 +65,8 @@
     padding: 10px;
     border: 1px solid #ddd;
     text-align: left;
+    color: black;
+    background-color: aliceblue;
   }
   
   .task-table th {

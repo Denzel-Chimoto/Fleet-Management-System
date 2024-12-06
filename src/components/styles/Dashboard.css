@@ -6,8 +6,7 @@
   align-items: center;
   padding: 20px;
   width: 100%;
-  background: linear-gradient(to bottom, #f9f9f9, #ffffff); /* Subtle gradient for a polished look */
-  min-height: 100vh;
+  background: linear-gradient(to bottom, #f9f9f9, #ffffff);
 }
 
 .cards {
@@ -15,7 +14,7 @@
   justify-content: center;
   gap: 20px;
   margin: 20px 0;
-  flex-wrap: wrap; /* Allows the cards to wrap on smaller screens */
+   /* Allows the cards to wrap on smaller screens */
 }
 
 .card {

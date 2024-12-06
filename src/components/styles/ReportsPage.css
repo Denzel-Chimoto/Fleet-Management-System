@@ -1,0 +1,31 @@
+.reports-page {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .reports-header {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .reports-images {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .report-image {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+  }
+  
+  .report-image:hover {
+    transform: scale(1.05);
+    border-color: #ffa500; /* Optional: Highlight border on hover */
+  }
+  

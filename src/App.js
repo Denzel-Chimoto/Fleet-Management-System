@@ -8,6 +8,7 @@ import AddVehicleForm from './components/AddVehicleForm';
 import DashBoard from './components/DashBoard';
 import FleetTracking from './components/FleetTracking';
 import TaskAssignmentPage from './components/TaskAssignmentPage';
+import ReportsPage from './components/ReportsPage';
 
 
 
@@ -17,7 +18,7 @@ import TaskAssignmentPage from './components/TaskAssignmentPage';
 //<DashBoard/>
 //<AddVehicleForm/>
 //      <VMH/>
-//You can uncomment them, render them insisde the div instead of the dashboard component to see the Login Page
+//You can uncomment them, render them insisde the div instead of the dashboard kuti muone Dashboard
 
 function App() {
   return (
@@ -29,6 +30,8 @@ function App() {
     <Route path='/addVehicle' element={<AddVehicleForm/>} />
     <Route path='/dashboard' element={<DashBoard/>}/>
     <Route path='/taskAssignment' element={<TaskAssignmentPage/>}/>
+    <Route path='/tracking' element={<FleetTracking/>}/>
+    <Route path='/reportsPage' element={<ReportsPage/>}/>
 
   </Routes>
   );
