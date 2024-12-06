@@ -1,0 +1,85 @@
+.task-page {
+    padding: 20px;
+  }
+  
+  .task-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logo-container {
+    height: 12vh;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: black; /* Labels set to black */
+  }
+  
+  .form-group input,
+  .form-group select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .custom-button {
+    padding: 10px 15px;
+    background-color: orange;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .custom-button:hover {
+    background-color: darkorange;
+  }
+  
+  .task-list {
+    margin-top: 30px;
+  }
+  
+  .task-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .task-table th,
+  .task-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .task-table th {
+    background-color: #f4f4f4;
+  }
+  
+  .custom-button.edit-button {
+    background-color: #007bff;
+  }
+  
+  .custom-button.delete-button {
+    background-color: #dc3545;
+  }
+  
+  .custom-button.update-button {
+    background-color: #28a745;
+  }
+  
