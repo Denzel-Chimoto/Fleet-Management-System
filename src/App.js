@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import CreateUser from './components/CreateUser';
 import Form from './components/Form';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route } from "react-router-dom";
 import VehicleManagementHome from './components/VehicleManagementHome';
 import AddVehicleForm from './components/AddVehicleForm';

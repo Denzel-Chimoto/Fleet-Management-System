@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Logo from "./Logo";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./styles/TaskAssignmentPage.css";
 
 const TaskAssignmentPage = () => {
   const [formData, setFormData] = useState({
@@ -16,7 +17,6 @@ const TaskAssignmentPage = () => {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  // Fetch tasks from the database
   useEffect(() => {
     const fetchTasks = async () => {
       try {
@@ -29,7 +29,6 @@ const TaskAssignmentPage = () => {
     fetchTasks();
   }, []);
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -49,7 +48,6 @@ const TaskAssignmentPage = () => {
     }
   };
 
-  // Handle input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -68,7 +66,6 @@ const TaskAssignmentPage = () => {
   };
   
 
-  // Handle delete operation
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:5000/api/tasks/${id}`);
@@ -81,56 +78,45 @@ const TaskAssignmentPage = () => {
   };
 
   return (
-    <div>
-      {/* Form for Task Creation */}
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <Logo imgSrc={"vfmsIMG.png"} style={{height:"20vh"}}/>
+    <div className="task-page">
+      <form onSubmit={handleSubmit} className="task-form">
+        <div className="logo-container">
+          <Logo imgSrc={"vfmsIMGBlack.png"} />
         </div>
-        <div>
-          <label className="form-label" htmlFor="description">
-            Task Description
-          </label>
+        <div className="form-group">
+          <label htmlFor="description">Task Description</label>
           <input
             type="text"
-            className="form-control"
             name="description"
             value={formData.description}
             onChange={handleInputChange}
             required
           />
         </div>
-        <div>
-          <label className="form-label" htmlFor="location">
-            Location
-          </label>
+        <div className="form-group">
+          <label htmlFor="location">Location</label>
           <input
             type="text"
-            className="form-control"
             name="location"
             value={formData.location}
             onChange={handleInputChange}
             required
           />
         </div>
-        <div>
-          <label className="form-label" htmlFor="deadline">
-            Deadline
-          </label>
+        <div className="form-group">
+          <label htmlFor="deadline">Deadline</label>
           <input
             type="datetime-local"
-            className="form-control"
             name="deadline"
             value={formData.deadline}
             onChange={handleInputChange}
             required
           />
         </div>
-        <div className="mb-3">
-          <label className="form-label">Assign To Driver</label>
+        <div className="form-group">
+          <label>Assign To Driver</label>
           <select
             name="driver"
-            className="form-control"
             value={formData.driver}
             onChange={handleInputChange}
           >
@@ -138,11 +124,10 @@ const TaskAssignmentPage = () => {
             <option value="Mutenje">Mutenje</option>
           </select>
         </div>
-        <div className="mb-3">
-          <label className="form-label">Status</label>
+        <div className="form-group">
+          <label>Status</label>
           <select
             name="status"
-            className="form-control"
             value={formData.status}
             onChange={handleInputChange}
           >
@@ -150,17 +135,16 @@ const TaskAssignmentPage = () => {
             <option value="In-Progress">In-Progress</option>
           </select>
         </div>
-        <button className="btn btn-primary" type="submit">
+        <button type="submit" className="custom-button">
           Submit
         </button>
       </form>
 
-      {/* Task List Table */}
-      <div className="container mt-5">
+      <div className="task-list">
         <h2 style={{color:"white"}}>Task List</h2>
-        {message && <div className="alert alert-info">{message}</div>}
-        <table className="table table-striped table-bordered">
-          <thead className="table-dark">
+        {message && <div className="task-message">{message}</div>}
+        <table className="task-table">
+          <thead>
             <tr>
               <th>#</th>
               <th>Task ID</th>
@@ -168,7 +152,7 @@ const TaskAssignmentPage = () => {
               <th>Driver</th>
               <th>Status</th>
               <th>Deadline</th>
-              <th>Quick Actions</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -181,14 +165,14 @@ const TaskAssignmentPage = () => {
                 <td>{task.status}</td>
                 <td>{task.deadline}</td>
                 <td>
-                  <button className="btn btn-warning btn-sm m-1">Edit</button>
+                  <button className="custom-button edit-button">Edit</button>
                   <button
-                    className="btn btn-danger btn-sm m-1"
+                    className="custom-button delete-button"
                     onClick={() => handleDelete(task.id)}
                   >
                     Delete
                   </button>
-                  <button onClick={handleUpdateStatus} className="btn btn-success btn-sm m-1">
+                  <button className="custom-button update-button">
                     Update Status
                   </button>
                 </td>

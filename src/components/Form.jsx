@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import DropDown from "./DropDown";
 import Logo from "./Logo";
 import { useNavigate } from "react-router-dom";
-import '../components/styles/Form.css';
+import "./styles/Form.css";
 
 const Form = () => {
   const [email, setEmail] = useState("");
@@ -43,38 +43,32 @@ const Form = () => {
     <Fragment>
       <div className="form-container">
         <div className="logo-container">
-          <Logo imgSrc={"vfmsIMG.png"}/>
+          <Logo imgSrc={"vfmsIMG.png"} />
         </div>
-        <form onSubmit={onSubmitForm} className="login-form">
-          <div className="mb-3">
-            <label className="form-label" htmlFor="email">
-              Email
-            </label>
+        <form onSubmit={onSubmitForm} className="custom-form">
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
             <input
               onChange={(e) => setEmail(e.target.value)}
               type="email"
               value={email}
-              className="form-control"
               name="email"
               id="email"
               required
             />
           </div>
-          <div className="mb-3">
-            <label className="form-label" htmlFor="password">
-              Password
-            </label>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
             <input
               onChange={(e) => setPassword(e.target.value)}
               type="password"
               value={password}
-              className="form-control"
               name="password"
               id="password"
               required
             />
           </div>
-          <div className="mb-3 d-flex justify-content-between align-items-center">
+          <div className="form-group">
             <a href="/create-user">Forgot Password?</a>
             <DropDown
               value1="Fleet Manager"
@@ -83,15 +77,14 @@ const Form = () => {
             />
           </div>
           <button
-            className="btn btn-primary w-100"
-            id="submit"
+            className="custom-button"
             type="submit"
             disabled={loading}
           >
             {loading ? "Submitting..." : "Submit"}
           </button>
         </form>
-        {message && <p className="mt-3 alert alert-info">{message}</p>}
+        {message && <p className="form-message">{message}</p>}
       </div>
     </Fragment>
   );
