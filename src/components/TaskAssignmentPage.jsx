@@ -55,6 +55,19 @@ const TaskAssignmentPage = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  //Handle Task Update
+  const handleUpdateStatus = async (id, newStatus) => {
+    try {
+      const updatedTask = await axios.put(`http://localhost:5000/api/tasks/${id}`, { status: newStatus });
+      setTasks(tasks.map(task => task.id === id ? updatedTask.data : task));
+      setMessage("Task status updated successfully!");
+    } catch (error) {
+      console.error("Error updating task status:", error);
+      setMessage("Error updating task status.");
+    }
+  };
+  
+
   // Handle delete operation
   const handleDelete = async (id) => {
     try {
@@ -175,7 +188,7 @@ const TaskAssignmentPage = () => {
                   >
                     Delete
                   </button>
-                  <button className="btn btn-success btn-sm m-1">
+                  <button onClick={handleUpdateStatus} className="btn btn-success btn-sm m-1">
                     Update Status
                   </button>
                 </td>
