@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React, {useState} from 'react'; 
 import './App.css';
 import CreateUser from './components/CreateUser';
 import Form from './components/Form';
@@ -8,7 +8,12 @@ import AddVehicleForm from './components/AddVehicleForm';
 import DashBoard from './components/DashBoard';
 import FleetTracking from './components/FleetTracking';
 import TaskAssignmentPage from './components/TaskAssignmentPage';
+<<<<<<< HEAD
 import ReportsPage from './components/ReportsPage';
+=======
+import Header from './components/Header';
+import Sidebar from './components/SideBar';
+>>>>>>> da42e36bf52cbbc5e77d73d32eda63bffd99f748
 
 
 
@@ -21,7 +26,14 @@ import ReportsPage from './components/ReportsPage';
 //You can uncomment them, render them insisde the div instead of the dashboard kuti muone Dashboard
 
 function App() {
+
+
+
   return (
+    <>
+    <Header/>
+    <div className='grid-container'>
+      <Sidebar/>
     <Routes>
     <Route path="/create-user" element={<CreateUser />} />
     <Route path="/login" element={<Form />} />
@@ -30,10 +42,15 @@ function App() {
     <Route path='/addVehicle' element={<AddVehicleForm/>} />
     <Route path='/dashboard' element={<DashBoard/>}/>
     <Route path='/taskAssignment' element={<TaskAssignmentPage/>}/>
+<<<<<<< HEAD
     <Route path='/tracking' element={<FleetTracking/>}/>
     <Route path='/reportsPage' element={<ReportsPage/>}/>
 
+=======
+>>>>>>> da42e36bf52cbbc5e77d73d32eda63bffd99f748
   </Routes>
+  </div>
+  </>
   );
 }
 
