@@ -23,7 +23,7 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
         {/* Dashboard */}
         <li className="sidebar-list-item">
           <NavLink
-            to="/"
+            to="/dashboard"
             className="sidebar-link"
             activeClassName="active-link"
             style={({ isActive }) =>
@@ -65,7 +65,7 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
         {/* Reports */}
         <li className="sidebar-list-item">
           <NavLink
-            to="/reports"
+            to="/reportsPage"
             className="sidebar-link"
             activeClassName="active-link"
             style={({ isActive }) =>
